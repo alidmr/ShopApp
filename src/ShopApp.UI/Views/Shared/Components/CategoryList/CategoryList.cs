@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShopApp.Business.Abstract;
-using ShopApp.UI.Models;
+using ShopApp.UI.Models.Category;
 
 namespace ShopApp.UI.Views.Shared.Components.CategoryList
 {
