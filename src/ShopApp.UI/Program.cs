@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace ShopApp.WebUI
+namespace ShopApp.UI
 {
     public class Program
     {
