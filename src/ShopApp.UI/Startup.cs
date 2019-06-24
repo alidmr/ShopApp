@@ -66,6 +66,16 @@ namespace ShopApp.UI
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "adminProducts",
+                    template: "admin/products",
+                    defaults: new { Controller = "Admin", Action = "Index" });
+
+                routes.MapRoute(
+                    name: "adminProducts",
+                    template: "admin/products/{id?}",
+                    defaults: new { Controller = "Admin", Action = "Edit" });
+
+                routes.MapRoute(
                     name: "products",
                     template: "products/{category?}",
                     defaults: new { Controller = "Shop", Action = "List" });
