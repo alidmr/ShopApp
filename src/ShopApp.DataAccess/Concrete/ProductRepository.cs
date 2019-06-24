@@ -56,5 +56,36 @@ namespace ShopApp.DataAccess.Concrete
 
             return products.Count();
         }
+
+        public Product GetByIdWithCategories(int id)
+        {
+            return Db.Products
+                .Where(x => x.Id == id)
+                .Include(x => x.ProductCategories)
+                .ThenInclude(x => x.Category)
+                .FirstOrDefault();
+        }
+
+        public void Update(Product entity, int[] categoryIds)
+        {
+            var product = Db.Products
+                .Include(x => x.ProductCategories)
+                .FirstOrDefault(x => x.Id == entity.Id);
+
+            if (product == null) return;
+
+            product.Name = entity.Name;
+            product.Description = entity.Description;
+            product.ImageUrl = entity.ImageUrl;
+            product.Price = entity.Price;
+
+            product.ProductCategories = categoryIds.Select(catId => new ProductCategory()
+            {
+                CategoryId = catId,
+                ProductId = entity.Id
+            }).ToList();
+
+            Db.SaveChanges();
+        }
     }
 }

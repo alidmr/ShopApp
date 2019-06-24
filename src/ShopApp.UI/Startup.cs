@@ -68,12 +68,12 @@ namespace ShopApp.UI
                 routes.MapRoute(
                     name: "adminProducts",
                     template: "admin/products",
-                    defaults: new { Controller = "Admin", Action = "Index" });
+                    defaults: new { Controller = "Admin", Action = "ProductList" });
 
                 routes.MapRoute(
                     name: "adminProducts",
                     template: "admin/products/{id?}",
-                    defaults: new { Controller = "Admin", Action = "Edit" });
+                    defaults: new { Controller = "Admin", Action = "EditProduct" });
 
                 routes.MapRoute(
                     name: "products",

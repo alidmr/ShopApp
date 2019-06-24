@@ -8,29 +8,38 @@
 
 <div class="row">
     <div class="col-md-8">
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="text-danger">@ViewBag.ErrorMessage</div>
+        }
         <form asp-action="CreateProduct" asp-controller="Admin" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group row">
-                <label class="col-md-2 col-form-label">Prodcut Name</label>
+                <label class="col-md-2 col-form-label">Product Name</label>
                 <div class="col-md-10">
-                    <input type="text" asp-for="Name" class="form-control" />
+                    <input type="text" asp-for="Name" value="@Model.Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-2 col-form-label">Product Image</label>
                 <div class="col-md-10">
-                    <input type="text" asp-for="ImageUrl" class="form-control" />
+                    <input type="text" asp-for="ImageUrl" value="@Model.ImageUrl" class="form-control" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label asp-for="Description" class="col-md-2 col-form-label">Product Description</label>
                 <div class="col-md-10">
-                    <textarea class="form-control" id="editor" asp-for="Description"></textarea>
+                    <textarea class="form-control" id="editor" value="@Model.Description" asp-for="Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label asp-for="Price" class="col-md-2 col-form-label">Product Price</label>
                 <div class="col-md-10">
-                    <input type="text" asp-for="Price" class="form-control" />
+                    <input type="text" asp-for="Price" value="@Model.Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
@@ -42,3 +51,13 @@
     </div>
 </div>
 
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+        CKEDITOR.replace("editor");
+    </script>
+}

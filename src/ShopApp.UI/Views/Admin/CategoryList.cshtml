@@ -1,0 +1,36 @@
+﻿@model ShopApp.UI.Models.Category.CategoryListViewModel
+@{
+    ViewData["Title"] = "CategoryList";
+}
+
+<h1>Category List</h1>
+<hr />
+<a asp-controller="Admin" asp-action="CreateCategory" class="btn btn-success">
+    <i class="fa fa-plus"></i> Add Category
+</a>
+<hr />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Category)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" asp-controller="Admin" asp-action="EditCategory" asp-route-id="@item.Id">Edit</a>
+                    <form asp-action="DeleteCategory" asp-controller="Admin" method="post" style="display: inline;">
+                        <input type="hidden" name="categoryId" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

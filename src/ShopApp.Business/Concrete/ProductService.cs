@@ -35,14 +35,20 @@ namespace ShopApp.Business.Concrete
             return _productRepository.GetAll(x => x.Price > 2000).ToList();
         }
 
-        public List<Product> GetProductsByCategory(string category,int page,int pageSize)
+        public List<Product> GetProductsByCategory(string category, int page, int pageSize)
         {
-            return _productRepository.GetProductsByCategory(category,page,pageSize);
+            return _productRepository.GetProductsByCategory(category, page, pageSize);
         }
 
-        public void Add(Product entity)
+        public bool Add(Product entity)
         {
-            _productRepository.Add(entity);
+            if (Validate(entity))
+            {
+                _productRepository.Add(entity);
+                return true;
+            }
+
+            return false;
         }
 
         public void Update(Product entity)
@@ -58,6 +64,29 @@ namespace ShopApp.Business.Concrete
         public int GetCountByCategory(string category)
         {
             return _productRepository.GetCountByCategory(category);
+        }
+
+        public Product GetByIdWithCategories(int id)
+        {
+            return _productRepository.GetByIdWithCategories(id);
+        }
+
+        public void Update(Product entity, int[] categoryIds)
+        {
+            _productRepository.Update(entity, categoryIds);
+        }
+
+        public string ErrorMessage { get; set; }
+        public bool Validate(Product entity)
+        {
+            var isValid = true;
+            if (string.IsNullOrEmpty(entity.Name))
+            {
+                ErrorMessage += "Ürün ismi girmelisiniz...";
+                isValid = false;
+            }
+
+            return isValid;
         }
     }
 }

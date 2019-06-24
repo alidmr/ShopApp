@@ -60,9 +60,10 @@
                                 Admin
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Admin" asp-action="Index">Admin Products List</a>
+                                <a class="dropdown-item" asp-controller="Admin" asp-action="ProductList">Admin Products List</a>
                                 <a class="dropdown-item" asp-action="CreateProduct" asp-controller="Admin">Add Product</a>
-                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" asp-action="CategoryList" asp-controller="Admin">Category List</a>
+                                <a class="dropdown-item" asp-action="CreateCategory" asp-controller="Admin">Add Category</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
