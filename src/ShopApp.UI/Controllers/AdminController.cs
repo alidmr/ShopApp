@@ -20,7 +20,11 @@ namespace ShopApp.UI.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new ProductListViewModel()
+            {
+                Products = _productService.GetAll()
+            };
+            return View(model);
         }
         [HttpGet]
         public IActionResult CreateProduct()
@@ -38,7 +42,45 @@ namespace ShopApp.UI.Controllers
                 ImageUrl = model.ImageUrl
             };
             _productService.Add(entity);
-            return Redirect("Index");
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var result = _productService.GetById((int)id);
+            if (result==null)
+            {
+                return NotFound();
+            }
+            var model = new ProductViewModel()
+            {
+                Id = result.Id,
+                Name = result.Name,
+                Price = result.Price,
+                Description = result.Description,
+                ImageUrl = result.ImageUrl
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Edit(ProductViewModel model)
+        {
+            var entity = _productService.GetById(model.Id);
+            if (entity==null)
+            {
+                return NotFound();
+            }
+
+            entity.Name = model.Name;
+            entity.Description = model.Description;
+            entity.ImageUrl = model.ImageUrl;
+            entity.Price = model.Price;
+            _productService.Update(entity);
+            return RedirectToAction("Index");
         }
     }
 }

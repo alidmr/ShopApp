@@ -1,7 +1,35 @@
-﻿
+﻿@model ShopApp.UI.Models.Product.ProductListViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Admin Product</h1>
 
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>
+                    <img src="~/img/@item.ImageUrl" width="80" />
+                </td>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>
+                    <a href="/admin/products/@item.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
+                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
