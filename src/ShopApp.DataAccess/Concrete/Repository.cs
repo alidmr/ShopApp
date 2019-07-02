@@ -17,34 +17,34 @@ namespace ShopApp.DataAccess.Concrete
             Db = db;
             _dbSet = Db.Set<T>();
         }
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             return _dbSet.Find(id);
         }
 
-        public T GetOne(Expression<Func<T, bool>> filter)
+        public virtual T GetOne(Expression<Func<T, bool>> filter)
         {
             return _dbSet.Where(filter).SingleOrDefault();
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null)
+        public virtual IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null)
         {
             return filter == null ? _dbSet.ToList() : _dbSet.Where(filter).ToList();
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             _dbSet.Add(entity);
             SaveChanges();
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _dbSet.Update(entity);
             SaveChanges();
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             _dbSet.Remove(entity);
             SaveChanges();

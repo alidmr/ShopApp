@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
+using ShopApp.Entities;
 
-namespace ShopApp.Entities
+namespace ShopApp.UI.Models.Order
 {
-    public class Order
+    public class OrderListViewModel
     {
-        public Order()
-        {
-            OrderItems = new List<OrderItem>();
-        }
         public int Id { get; set; }
         public string OrderNumber { get; set; }
         public DateTime OrderDate { get; set; }
-        public string UserId { get; set; }
         public EnumOrderState OrderState { get; set; }
         public EnumPaymentTypes PaymentTypes { get; set; }
         public string FirstName { get; set; }
@@ -23,21 +20,19 @@ namespace ShopApp.Entities
         public string Phone { get; set; }
         public string Email { get; set; }
         public string OrderNote { get; set; }
-        public string PaymentId { get; set; }
-        public string PaymentToken { get; set; }
-        public string ConversationId { get; set; }
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItemModel> OrderItems { get; set; }
+        public decimal TotalPrice()
+        {
+            return OrderItems.Sum(x => x.Price * x.Quantity);
+        }
     }
 
-    public enum EnumOrderState
+    public class OrderItemModel
     {
-        Waiting = 0,
-        Unpaid = 1,
-        Completed = 2
-    }
-    public enum EnumPaymentTypes
-    {
-        CreditCart = 0,
-        Eft = 1
+        public int OrderItemId { get; set; }
+        public decimal Price { get; set; }
+        public string Name { get; set; }
+        public string ImageUrl { get; set; }
+        public int Quantity { get; set; }
     }
 }
